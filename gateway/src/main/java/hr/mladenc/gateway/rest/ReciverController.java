@@ -28,6 +28,21 @@ public class ReciverController {
     public ResponseEntity<?> greeting(@RequestBody final String message) throws Exception {
         ReciverController.log.debug("Got message: {}", message);
 
-        return new ResponseEntity<String>(HttpStatus.OK);
+        if (isValid(message)) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+    }
+
+    /**
+     * Checks revived messages against JSON schemas
+     *
+     * @param message
+     * @return
+     */
+    private boolean isValid(final String message) {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
