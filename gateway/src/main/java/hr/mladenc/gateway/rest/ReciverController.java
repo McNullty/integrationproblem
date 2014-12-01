@@ -25,7 +25,7 @@ public class ReciverController {
     final static Logger log = LoggerFactory.getLogger(ReciverController.class);
 
     @RequestMapping(value = "/recive", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> greeting(@RequestBody final String message) throws Exception {
+    public ResponseEntity<?> recive(@RequestBody final String message) throws Exception {
         ReciverController.log.debug("Got message: {}", message);
 
         if (isValid(message)) {
