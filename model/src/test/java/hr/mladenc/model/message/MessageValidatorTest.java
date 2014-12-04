@@ -11,13 +11,13 @@ import org.junit.Test;
  * @author mladenc
  *
  */
-public class ValidatorTest {
+public class MessageValidatorTest {
 
-    private Validator validator;
+    private MessageValidator validator;
 
     @Before
     public void initialize() {
-        this.validator = new Validator();
+        this.validator = new MessageValidator();
     }
 
     @Test
@@ -71,7 +71,7 @@ public class ValidatorTest {
 
     @Test
     public void testSuccessfulParsingMessageV101() {
-        final String message = "{\"messageId\":367, \"timestamp\":124556789, \"protocolVersion\":\"1.0.1\", \"messageData\":{\"mMX\":212234, \"mPermGen\":552232, \"mOldGen\":2567000}}";
+        final String message = "{\"messageId\":367, \"timestamp\":124556789, \"protocolVersion\":\"01.0.1\", \"messageData\":{\"mMX\":212234, \"mPermGen\":552232, \"mOldGen\":2567000}}";
 
         Assert.assertTrue(this.validator.validate(message));
     }

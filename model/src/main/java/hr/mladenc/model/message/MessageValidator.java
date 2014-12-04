@@ -13,9 +13,9 @@ import org.slf4j.LoggerFactory;
  * @author mladenc
  *
  */
-public class Validator {
+public class MessageValidator {
 
-    private static final Logger log = LoggerFactory.getLogger(Validator.class);
+    private static final Logger log = LoggerFactory.getLogger(MessageValidator.class);
 
     public Boolean validate(final String message) {
         final MessageFactory mf = new MessageFactory();
@@ -24,19 +24,19 @@ public class Validator {
         if (incomingMessage != null) {
             if ((incomingMessage.getMessageId() == null) || (incomingMessage.getTimestamp() == null)
                     || (incomingMessage.getProtocolVersion() == null)) {
-                Validator.log.info("messageId, timestamp and protocolVersion are mandatory");
+                MessageValidator.log.info("messageId, timestamp and protocolVersion are mandatory");
                 return false;
             }
 
             if ((incomingMessage.getMessageId() < 1) || (incomingMessage.getTimestamp().signum() < 1)) {
-                Validator.log.info("messageId and timestamp are positive integer numbers");
+                MessageValidator.log.info("messageId and timestamp are positive integer numbers");
                 return false;
             }
 
             final Pattern protocolVersionPattern = Pattern.compile("\\d{2}\\.\\d\\.\\d");
             final Matcher matcher = protocolVersionPattern.matcher(incomingMessage.getProtocolVersion());
             if (!matcher.matches()) {
-                Validator.log.info("protocolVersion has format ##.#.# where # stays for one numeric character");
+                MessageValidator.log.info("protocolVersion has format ##.#.# where # stays for one numeric character");
                 return false;
             }
 
