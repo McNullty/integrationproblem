@@ -75,4 +75,11 @@ public class MessageValidatorTest {
 
         Assert.assertTrue(this.validator.validate(message));
     }
+
+    @Test
+    public void testSuccessfulParsingMessageV200() {
+        final String message = "{\"messageId\":915, \"timestamp\":125656789, \"protocolVersion\":\"02.0.0\", \"payload\":{\"mMX\":212234, \"mPermGen\":552232, \"mOldGen\":2567000, \"mYoungGen\":145600}}";
+
+        Assert.assertTrue(this.validator.validate(message));
+    }
 }
