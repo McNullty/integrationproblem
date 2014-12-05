@@ -3,6 +3,8 @@
  */
 package hr.mladenc.gateway.configuration;
 
+import hr.mladenc.gateway.sender.AmqpMessageSender;
+
 import javax.inject.Inject;
 
 import org.springframework.amqp.core.AmqpAdmin;
@@ -13,6 +15,7 @@ import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 
 /**
@@ -20,6 +23,7 @@ import org.springframework.core.env.Environment;
  *
  */
 @Configuration
+@Profile(value = { "amqp" })
 public class RabbitMqConfiguration {
 
     @Inject
@@ -45,5 +49,10 @@ public class RabbitMqConfiguration {
     @Bean
     public Queue messageGatewayQueue() {
         return new Queue(this.env.getProperty("queue.name"));
+    }
+
+    @Bean
+    public AmqpMessageSender getSender() {
+        return new AmqpMessageSender(rabbitTemplate(), this.env.getProperty("queue.name"));
     }
 }

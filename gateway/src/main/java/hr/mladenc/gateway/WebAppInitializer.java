@@ -7,6 +7,7 @@ import hr.mladenc.gateway.configuration.GatewayConfiguration;
 import hr.mladenc.gateway.configuration.PropertiesConfiguration;
 import hr.mladenc.gateway.configuration.RabbitMqConfiguration;
 import hr.mladenc.gateway.configuration.RootConfiguration;
+import hr.mladenc.gateway.constants.Constants;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -34,11 +35,12 @@ public class WebAppInitializer implements WebApplicationInitializer {
     @Override
     public void onStartup(final ServletContext container) throws ServletException {
 
-        // TODO: Provjeriti je li potrebna ROOT konfiguracija
         // TODO: Provjeriti je li potreban logback-test.xml
         // The definition of the Root Spring Container shared by all Servlets and Filters
         final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        // TODO: Provjeriti je li potrebna ROOT konfiguracija
         rootContext.register(RootConfiguration.class);
+        rootContext.getEnvironment().setActiveProfiles(addActiveProfiles());
 
         // Creates the Spring Container shared by all Servlets and Filters
         container.addListener(new ContextLoaderListener(rootContext));
@@ -54,5 +56,12 @@ public class WebAppInitializer implements WebApplicationInitializer {
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping("/");
 
+    }
+
+    /**
+     * @return
+     */
+    private String addActiveProfiles() {
+        return Constants.SPRING_AMQP_PROFILE;
     }
 }
