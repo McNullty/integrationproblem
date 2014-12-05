@@ -3,6 +3,8 @@
  */
 package hr.mladenc.gateway.configuration;
 
+import hr.mladenc.model.message.MessageValidator;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -21,6 +23,6 @@ public class GatewayConfiguration {
 
     @Bean
     public MessageValidator getValidator() {
-
+        return new MessageValidator();
     }
 }

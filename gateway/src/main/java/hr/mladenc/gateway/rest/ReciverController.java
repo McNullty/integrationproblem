@@ -3,6 +3,8 @@
  */
 package hr.mladenc.gateway.rest;
 
+import hr.mladenc.model.message.MessageValidator;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Controler that accepts JSON messages
+ * Controller that accepts JSON messages
  *
  * @author mladenc
  *
@@ -30,27 +32,21 @@ public class ReciverController {
     @Inject
     private AmqpTemplate template;
 
+    @Inject
+    private MessageValidator validator;
+
     @RequestMapping(value = "/recive", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> recive(@RequestBody final String message) throws Exception {
         ReciverController.log.debug("Got message: {}", message);
 
-        if (isValid(message)) {
+        if (this.validator.validate(message)) {
             // TODO: Parametrizirati
             this.template.convertAndSend("messageGatewayQueue", message);
             return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            ReciverController.log.error("Error validating message {}", message);
+
+            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
-
-        return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
-    }
-
-    /**
-     * Checks revived messages against JSON schemas
-     *
-     * @param message
-     * @return
-     */
-    private boolean isValid(final String message) {
-        // TODO Auto-generated method stub
-        return true;
     }
 }
