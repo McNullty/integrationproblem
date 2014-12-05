@@ -4,6 +4,7 @@
 package hr.mladenc.gateway;
 
 import hr.mladenc.gateway.configuration.GatewayConfiguration;
+import hr.mladenc.gateway.configuration.PropertiesConfiguration;
 import hr.mladenc.gateway.configuration.RabbitMqConfiguration;
 import hr.mladenc.gateway.configuration.RootConfiguration;
 
@@ -27,7 +28,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
@@ -44,7 +45,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         // Create the dispatcher servlet's Spring application context
         final AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(GatewayConfiguration.class, RabbitMqConfiguration.class);
+        dispatcherContext.register(PropertiesConfiguration.class, GatewayConfiguration.class,
+                RabbitMqConfiguration.class);
 
         // Register and map the dispatcher servlet
         final ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(

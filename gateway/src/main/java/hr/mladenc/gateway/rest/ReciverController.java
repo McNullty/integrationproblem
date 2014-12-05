@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +31,9 @@ public class ReciverController {
     final static Logger log = LoggerFactory.getLogger(ReciverController.class);
 
     @Inject
+    private Environment env;
+
+    @Inject
     private AmqpTemplate template;
 
     @Inject
@@ -40,8 +44,8 @@ public class ReciverController {
         ReciverController.log.debug("Got message: {}", message);
 
         if (this.validator.validate(message)) {
-            // TODO: Parametrizirati
-            this.template.convertAndSend("messageGatewayQueue", message);
+            // TODO: Abstrahirati, tako da se mogu slati JMS i AMQP poruke
+            this.template.convertAndSend(this.env.getProperty("queue.name"), message);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             ReciverController.log.error("Error validating message {}", message);
