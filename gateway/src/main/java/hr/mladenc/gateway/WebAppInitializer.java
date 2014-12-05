@@ -3,6 +3,7 @@
  */
 package hr.mladenc.gateway;
 
+import hr.mladenc.gateway.configuration.ActiveMqConfiguration;
 import hr.mladenc.gateway.configuration.GatewayConfiguration;
 import hr.mladenc.gateway.configuration.PropertiesConfiguration;
 import hr.mladenc.gateway.configuration.RabbitMqConfiguration;
@@ -48,7 +49,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         // Create the dispatcher servlet's Spring application context
         final AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
         dispatcherContext.register(PropertiesConfiguration.class, GatewayConfiguration.class,
-                RabbitMqConfiguration.class);
+                RabbitMqConfiguration.class, ActiveMqConfiguration.class);
 
         // Register and map the dispatcher servlet
         final ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
@@ -62,6 +63,6 @@ public class WebAppInitializer implements WebApplicationInitializer {
      * @return
      */
     private String addActiveProfiles() {
-        return Constants.SPRING_AMQP_PROFILE;
+        return Constants.SPRING_JMS_PROFILE;
     }
 }

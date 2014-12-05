@@ -15,7 +15,7 @@ import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
  */
 @Configuration
 @PropertySources(value = { @PropertySource("classpath:common.properties"),
-        @PropertySource("classpath:rabbitmq.properties") })
+        @PropertySource("classpath:rabbitmq.properties"), @PropertySource("classpath:activemq.properties") })
 public class PropertiesConfiguration {
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {

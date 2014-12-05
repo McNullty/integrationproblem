@@ -11,13 +11,7 @@ import org.springframework.amqp.core.AmqpTemplate;
  */
 public class AmqpMessageSender implements MessageSender {
 
-    private AmqpTemplate template;
-
-    /**
-     *
-     */
-    public AmqpMessageSender() {
-    }
+    private final AmqpTemplate template;
 
     public AmqpMessageSender(final AmqpTemplate template) {
         this.template = template;
@@ -25,7 +19,7 @@ public class AmqpMessageSender implements MessageSender {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see hr.mladenc.gateway.sender.MessageSender#send(java.lang.Object)
      */
     @Override
