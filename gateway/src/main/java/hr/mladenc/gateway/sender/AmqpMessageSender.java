@@ -12,7 +12,6 @@ import org.springframework.amqp.core.AmqpTemplate;
 public class AmqpMessageSender implements MessageSender {
 
     private AmqpTemplate template;
-    private String routingKey;
 
     /**
      *
@@ -20,9 +19,8 @@ public class AmqpMessageSender implements MessageSender {
     public AmqpMessageSender() {
     }
 
-    public AmqpMessageSender(final AmqpTemplate template, final String routingKey) {
+    public AmqpMessageSender(final AmqpTemplate template) {
         this.template = template;
-        this.routingKey = routingKey;
     }
 
     /*
@@ -33,7 +31,6 @@ public class AmqpMessageSender implements MessageSender {
     @Override
     public void send(final Object message) {
         this.template.convertAndSend(message);
-        this.template.convertAndSend(this.routingKey, message);
     }
 
 }
