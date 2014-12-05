@@ -21,6 +21,7 @@ public class RabbitMqConfiguration {
 
     @Bean
     public ConnectionFactory connectionFactory() {
+        // TODO: Parametrizirati
         final CachingConnectionFactory connectionFactory = new CachingConnectionFactory("localhost");
         return connectionFactory;
     }
@@ -36,7 +37,8 @@ public class RabbitMqConfiguration {
     }
 
     @Bean
-    public Queue myQueue() {
+    public Queue messageGatewayQueue() {
+        // TODO: Parametrizirati
         return new Queue("messageGatewayQueue");
     }
 }

@@ -35,7 +35,8 @@ public class ReciverController {
         ReciverController.log.debug("Got message: {}", message);
 
         if (isValid(message)) {
-            this.template.convertAndSend("myqueue", message);
+            // TODO: Parametrizirati
+            this.template.convertAndSend("messageGatewayQueue", message);
             return new ResponseEntity<>(HttpStatus.OK);
         }
 

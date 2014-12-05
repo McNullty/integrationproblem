@@ -29,8 +29,7 @@
 			<artifactId>spring-rabbit</artifactId>
 			<version>1.4.0.RELEASE</version>
 		</dependency>
-
-		
+				
 		<!-- JavaConfig need this library -->
 		<dependency>
 			<groupId>cglib</groupId>

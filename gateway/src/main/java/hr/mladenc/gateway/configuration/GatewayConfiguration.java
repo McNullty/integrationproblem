@@ -3,6 +3,7 @@
  */
 package hr.mladenc.gateway.configuration;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -18,4 +19,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @ComponentScan(basePackages = { "hr.mladenc.gateway.rest" })
 public class GatewayConfiguration {
 
+    @Bean
+    public MessageValidator getValidator() {
+
+    }
 }
