@@ -3,7 +3,6 @@
  */
 package hr.mladenc.processor;
 
-
 /**
  * @author mladenc
  *
@@ -11,4 +10,5 @@ package hr.mladenc.processor;
 public interface MessageProcessor {
 
     public void process(String queueName);
+
 }
