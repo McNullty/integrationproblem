@@ -29,33 +29,29 @@ public class RabbitMqConfiguration {
     @Inject
     private Environment env;
 
-    @Bean
     public ConnectionFactory connectionFactory() {
         final CachingConnectionFactory connectionFactory = new CachingConnectionFactory(
                 this.env.getProperty("rabitmq.hostname"));
         return connectionFactory;
     }
 
-    @Bean
     public AmqpAdmin amqpAdmin() {
         return new RabbitAdmin(connectionFactory());
     }
 
-    @Bean
     public RabbitTemplate rabbitTemplate() {
         final RabbitTemplate template = new RabbitTemplate(connectionFactory());
         template.setRoutingKey(this.env.getProperty("queue.name"));
-        ;
 
         return template;
     }
 
-    @Bean
     public Queue messageGatewayQueue() {
         return new Queue(this.env.getProperty("queue.name"));
     }
 
     @Bean
+    @Profile(value = { "amqp-gateway" })
     public AmqpMessageSender getSender() {
         return new AmqpMessageSender(rabbitTemplate());
     }

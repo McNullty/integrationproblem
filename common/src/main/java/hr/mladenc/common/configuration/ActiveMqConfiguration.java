@@ -26,7 +26,6 @@ public class ActiveMqConfiguration {
     @Inject
     private Environment env;
 
-    @Bean
     public ActiveMQConnectionFactory getConnectionFactory() {
         final ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
         cf.setBrokerURL("tcp://" + this.env.getProperty("activemq.hostname") + ":"
@@ -35,13 +34,11 @@ public class ActiveMqConfiguration {
         return cf;
     }
 
-    @Bean
     public ActiveMQQueue getDestination() {
         final ActiveMQQueue queue = new ActiveMQQueue(this.env.getProperty("queue.name"));
         return queue;
     }
 
-    @Bean
     public JmsMessagingTemplate getJmsTemplate() {
         final JmsMessagingTemplate template = new JmsMessagingTemplate(getConnectionFactory());
         template.setDefaultDestination(getDestination());
@@ -50,6 +47,7 @@ public class ActiveMqConfiguration {
     }
 
     @Bean
+    @Profile(value = { "jms-gateway" })
     public JmsMessageSender getMessageSender() {
         return new JmsMessageSender(getJmsTemplate());
     }
