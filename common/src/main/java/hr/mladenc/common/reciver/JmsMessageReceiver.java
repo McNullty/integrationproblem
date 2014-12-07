@@ -22,12 +22,23 @@ public class JmsMessageReceiver implements MessageReceiver {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see hr.mladenc.common.reciver.MessageReceiver#receive()
      */
     @Override
     public String receive() {
         return this.jmsTemplate.receiveAndConvert(String.class);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see hr.mladenc.common.reciver.MessageReceiver#setQueue(java.lang.String)
+     */
+    @Override
+    public void setQueue(final String queueName) {
+        this.jmsTemplate.setDefaultDestinationName(queueName);
+
     }
 
 }

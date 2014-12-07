@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package hr.mladenc.common.reciver;
 
@@ -10,8 +10,14 @@ package hr.mladenc.common.reciver;
 public interface MessageReceiver {
 
     /**
-     * Receive 
+     * Receive
+     * 
      * @return
      */
     public String receive();
+
+    /**
+     * @param queueName
+     */
+    public void setQueue(String queueName);
 }
