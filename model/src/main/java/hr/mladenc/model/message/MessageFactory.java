@@ -3,6 +3,7 @@
  */
 package hr.mladenc.model.message;
 
+import hr.mladenc.model.message.v100.MessageV100;
 import hr.mladenc.model.message.v101.MessageV101;
 import hr.mladenc.model.message.v200.MessageV200;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -24,7 +26,7 @@ public class MessageFactory {
 
         AbstractMessage ret = null;
 
-        ret = deserialize(message, MessageV101.class);
+        ret = deserialize(message, MessageV100.class);
 
         if (ret == null) {
             ret = deserialize(message, MessageV101.class);
@@ -44,6 +46,8 @@ public class MessageFactory {
 
     private <T extends AbstractMessage> AbstractMessage deserialize(final String message, final Class<T> valueType) {
         final ObjectMapper mapper = new ObjectMapper();
+        mapper.enable(DeserializationFeature.FAIL_ON_IGNORED_PROPERTIES);
+
         AbstractMessage ret = null;
 
         try {
@@ -51,6 +55,7 @@ public class MessageFactory {
         } catch (final IOException e) {
             MessageFactory.log.info("Could not deserialize as class {}", valueType.getName());
         }
+
         return ret;
     }
 }
