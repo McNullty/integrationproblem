@@ -9,8 +9,6 @@ import hr.mladenc.common.sender.AmqpMessageSender;
 import javax.inject.Inject;
 
 import org.springframework.amqp.core.AmqpAdmin;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
@@ -41,29 +39,24 @@ public class RabbitMqConfiguration {
     @Bean
     public AmqpAdmin amqpAdmin() {
         final RabbitAdmin ra = new RabbitAdmin(connectionFactory());
-        ra.declareQueue(messageGatewayQueue());
-        ra.declareExchange(new DirectExchange(this.env.getProperty("rabitmq.exchange")));
 
         return ra;
-
     }
 
     @Bean
     public RabbitTemplate rabbitTemplate() {
         final RabbitTemplate template = new RabbitTemplate(connectionFactory());
-        template.setRoutingKey(this.env.getProperty("queue.name"));
 
         return template;
-    }
-
-    public Queue messageGatewayQueue() {
-        return new Queue(this.env.getProperty("queue.name"));
     }
 
     @Bean
     @Profile(value = { "amqp-gateway" })
     public AmqpMessageSender getSender() {
-        return new AmqpMessageSender(rabbitTemplate());
+        final AmqpMessageSender sender = new AmqpMessageSender(rabbitTemplate());
+        sender.setQueue(this.env.getProperty("queue.name"));
+
+        return sender;
     }
 
     @Bean

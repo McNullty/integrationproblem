@@ -12,6 +12,7 @@ import org.springframework.jms.core.JmsMessagingTemplate;
 public class JmsMessageSender implements MessageSender {
 
     private final JmsMessagingTemplate jmsTemplate;
+    private String queueName;
 
     /**
      * @param jmsTemplate
@@ -27,7 +28,17 @@ public class JmsMessageSender implements MessageSender {
      */
     @Override
     public void send(final Object message) {
-        this.jmsTemplate.convertAndSend(message);
+        this.jmsTemplate.convertAndSend(this.queueName, message);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see hr.mladenc.common.sender.MessageSender#setQueue(java.lang.String)
+     */
+    @Override
+    public void setQueue(final String queueName) {
+        this.queueName = queueName;
     }
 
 }

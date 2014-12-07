@@ -16,4 +16,10 @@ public interface MessageSender {
      */
     void send(Object message);
 
+    /**
+     * Sets queue for sending messages
+     *
+     * @param queueName
+     */
+    public void setQueue(String queueName);
 }

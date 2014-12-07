@@ -50,7 +50,9 @@ public class ActiveMqConfiguration {
     @Bean
     @Profile(value = { "jms-gateway" })
     public JmsMessageSender getMessageSender() {
-        return new JmsMessageSender(getJmsTemplate());
+        final JmsMessageSender sender = new JmsMessageSender(getJmsTemplate());
+
+        return sender;
     }
 
     @Bean
