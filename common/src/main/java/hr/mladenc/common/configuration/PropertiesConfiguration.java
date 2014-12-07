@@ -1,7 +1,7 @@
 /**
  *
  */
-package hr.mladenc.gateway.configuration;
+package hr.mladenc.common.configuration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

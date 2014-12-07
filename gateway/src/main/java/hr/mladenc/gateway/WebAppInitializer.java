@@ -4,10 +4,10 @@
 package hr.mladenc.gateway;
 
 import hr.mladenc.common.configuration.ActiveMqConfiguration;
+import hr.mladenc.common.configuration.PropertiesConfiguration;
 import hr.mladenc.common.configuration.RabbitMqConfiguration;
 import hr.mladenc.common.constants.Constants;
 import hr.mladenc.gateway.configuration.GatewayConfiguration;
-import hr.mladenc.gateway.configuration.PropertiesConfiguration;
 import hr.mladenc.gateway.configuration.RootConfiguration;
 
 import javax.servlet.ServletContext;
