@@ -19,7 +19,7 @@ public class AmqpMessageSender implements MessageSender {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see hr.mladenc.gateway.sender.MessageSender#send(java.lang.Object)
      */
     @Override

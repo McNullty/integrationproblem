@@ -20,17 +20,17 @@ public class AmqpMessageReceiver implements MessageReceiver {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see hr.mladenc.common.reciver.MessageReceiver#receive()
      */
     @Override
     public String receive() {
-        return (String) this.template.receiveAndConvert(this.queueName);
+        return (String) this.template.receiveAndConvert();
     }
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see hr.mladenc.common.reciver.MessageReceiver#setQueue(java.lang.String)
      */
     @Override
