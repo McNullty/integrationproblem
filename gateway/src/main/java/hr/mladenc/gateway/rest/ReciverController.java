@@ -3,7 +3,7 @@
  */
 package hr.mladenc.gateway.rest;
 
-import hr.mladenc.gateway.sender.MessageSender;
+import hr.mladenc.common.sender.MessageSender;
 import hr.mladenc.model.message.MessageValidator;
 
 import javax.inject.Inject;

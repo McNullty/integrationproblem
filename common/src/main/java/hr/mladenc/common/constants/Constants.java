@@ -1,7 +1,7 @@
 /**
  *
  */
-package hr.mladenc.gateway.constants;
+package hr.mladenc.common.constants;
 
 /**
  * @author mladenc

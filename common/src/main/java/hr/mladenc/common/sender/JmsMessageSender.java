@@ -1,7 +1,7 @@
 /**
  *
  */
-package hr.mladenc.gateway.sender;
+package hr.mladenc.common.sender;
 
 import org.springframework.jms.core.JmsMessagingTemplate;
 

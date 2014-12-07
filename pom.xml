@@ -9,6 +9,7 @@
 		<module>gateway</module>
 		<module>model</module>
 		<module>processor</module>
+		<module>common</module>
 	</modules>
 	
 	<properties>

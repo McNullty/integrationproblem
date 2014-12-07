@@ -1,9 +1,9 @@
 /**
  *
  */
-package hr.mladenc.gateway.configuration;
+package hr.mladenc.common.configuration;
 
-import hr.mladenc.gateway.sender.JmsMessageSender;
+import hr.mladenc.common.sender.JmsMessageSender;
 
 import javax.inject.Inject;
 

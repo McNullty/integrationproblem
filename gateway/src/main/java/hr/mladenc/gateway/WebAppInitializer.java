@@ -3,12 +3,12 @@
  */
 package hr.mladenc.gateway;
 
-import hr.mladenc.gateway.configuration.ActiveMqConfiguration;
+import hr.mladenc.common.configuration.ActiveMqConfiguration;
+import hr.mladenc.common.configuration.RabbitMqConfiguration;
+import hr.mladenc.common.constants.Constants;
 import hr.mladenc.gateway.configuration.GatewayConfiguration;
 import hr.mladenc.gateway.configuration.PropertiesConfiguration;
-import hr.mladenc.gateway.configuration.RabbitMqConfiguration;
 import hr.mladenc.gateway.configuration.RootConfiguration;
-import hr.mladenc.gateway.constants.Constants;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
