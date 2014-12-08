@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Configuration;
  *
  */
 @Configuration
-@ComponentScan(basePackages = { "hr.mladenc.processor" })
+@ComponentScan(basePackages = { "hr.mladenc.processor", "hr.mladenc.listener" })
 public class ProcessorConfiguration {
 
 }
