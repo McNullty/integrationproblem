@@ -3,7 +3,6 @@
  */
 package hr.mladenc.common.configuration;
 
-import hr.mladenc.common.reciver.AmqpMessageReceiver;
 import hr.mladenc.common.sender.AmqpMessageSender;
 
 import javax.inject.Inject;
@@ -57,11 +56,5 @@ public class RabbitMqConfiguration {
         sender.setQueue(this.env.getProperty("queue.name"));
 
         return sender;
-    }
-
-    @Bean
-    @Profile(value = { "amqp-processor" })
-    public AmqpMessageReceiver getReceiver() {
-        return new AmqpMessageReceiver(rabbitTemplate());
     }
 }

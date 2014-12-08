@@ -3,7 +3,6 @@
  */
 package hr.mladenc.common.configuration;
 
-import hr.mladenc.common.reciver.JmsMessageReceiver;
 import hr.mladenc.common.sender.JmsMessageSender;
 
 import javax.inject.Inject;
@@ -68,9 +67,4 @@ public class ActiveMqConfiguration {
         return sender;
     }
 
-    @Bean
-    @Profile(value = { "jms-processor" })
-    public JmsMessageReceiver getMessageReceiver() {
-        return new JmsMessageReceiver(getJmsTemplate());
-    }
 }
