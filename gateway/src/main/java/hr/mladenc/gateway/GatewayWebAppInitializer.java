@@ -1,14 +1,14 @@
 /**
  *
  */
-package hr.mladenc;
+package hr.mladenc.gateway;
 
 import hr.mladenc.common.configuration.ActiveMqConfiguration;
 import hr.mladenc.common.configuration.PropertiesConfiguration;
 import hr.mladenc.common.configuration.RabbitMqConfiguration;
 import hr.mladenc.common.constants.Constants;
-import hr.mladenc.configuration.AmqpListenerConfiguration;
-import hr.mladenc.configuration.ProcessorConfiguration;
+import hr.mladenc.gateway.configuration.GatewayConfiguration;
+import hr.mladenc.gateway.configuration.RootConfiguration;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -25,12 +25,12 @@ import org.springframework.web.servlet.DispatcherServlet;
  * @author mladenc
  *
  */
-public class WebAppInitializer implements WebApplicationInitializer {
-    final static Logger log = LoggerFactory.getLogger(WebAppInitializer.class);
+public class GatewayWebAppInitializer implements WebApplicationInitializer {
+    final static Logger log = LoggerFactory.getLogger(GatewayWebAppInitializer.class);
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
@@ -39,6 +39,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
         // TODO: Provjeriti je li potreban logback-test.xml
         // The definition of the Root Spring Container shared by all Servlets and Filters
         final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
+        // TODO: Provjeriti je li potrebna ROOT konfiguracija
+        rootContext.register(RootConfiguration.class);
         rootContext.getEnvironment().setActiveProfiles(addActiveProfiles());
 
         // Creates the Spring Container shared by all Servlets and Filters
@@ -46,14 +48,14 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
         // Create the dispatcher servlet's Spring application context
         final AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(PropertiesConfiguration.class, RabbitMqConfiguration.class,
-                ActiveMqConfiguration.class, ProcessorConfiguration.class, AmqpListenerConfiguration.class);
+        dispatcherContext.register(PropertiesConfiguration.class, GatewayConfiguration.class,
+                RabbitMqConfiguration.class, ActiveMqConfiguration.class);
 
         // Register and map the dispatcher servlet
         final ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
                 dispatcherContext));
         dispatcher.setLoadOnStartup(1);
-        dispatcher.addMapping("/processor");
+        dispatcher.addMapping("/");
 
     }
 
@@ -61,10 +63,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
      * @return
      */
     private String[] addActiveProfiles() {
-        final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
-        // Constants.SPRING_JMS_STANDALONE };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
+        // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_GATEWAY };
+        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY,
+                Constants.SPRING_JMS_STANDALONE };
+        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY,
         // Constants.SPRING_JMS_EMBEDDED };
 
         return ret;

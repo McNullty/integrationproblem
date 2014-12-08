@@ -8,6 +8,7 @@ import hr.mladenc.common.configuration.PropertiesConfiguration;
 import hr.mladenc.common.configuration.RabbitMqConfiguration;
 import hr.mladenc.common.constants.Constants;
 import hr.mladenc.configuration.AmqpListenerConfiguration;
+import hr.mladenc.configuration.JmsListenerConfiguration;
 import hr.mladenc.configuration.ProcessorConfiguration;
 
 import org.slf4j.Logger;
@@ -33,7 +34,7 @@ public class MessageProcessorRunner {
 
         final AnnotatedBeanDefinitionReader reader = new AnnotatedBeanDefinitionReader(context);
         reader.register(PropertiesConfiguration.class, RabbitMqConfiguration.class, ActiveMqConfiguration.class,
-                ProcessorConfiguration.class, AmqpListenerConfiguration.class);
+                ProcessorConfiguration.class, AmqpListenerConfiguration.class, JmsListenerConfiguration.class);
 
         context.refresh();
 
