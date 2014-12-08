@@ -7,6 +7,7 @@ import hr.mladenc.common.configuration.ActiveMqConfiguration;
 import hr.mladenc.common.configuration.PropertiesConfiguration;
 import hr.mladenc.common.configuration.RabbitMqConfiguration;
 import hr.mladenc.common.constants.Constants;
+import hr.mladenc.configuration.AmqpListenerConfiguration;
 import hr.mladenc.configuration.ProcessorConfiguration;
 
 import javax.servlet.ServletContext;
@@ -29,7 +30,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
@@ -46,7 +47,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
         // Create the dispatcher servlet's Spring application context
         final AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
         dispatcherContext.register(PropertiesConfiguration.class, RabbitMqConfiguration.class,
-                ActiveMqConfiguration.class, ProcessorConfiguration.class);
+                ActiveMqConfiguration.class, ProcessorConfiguration.class, AmqpListenerConfiguration.class);
 
         // Register and map the dispatcher servlet
         final ServletRegistration.Dynamic dispatcher = container.addServlet("dispatcher", new DispatcherServlet(
@@ -60,10 +61,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
      * @return
      */
     private String[] addActiveProfiles() {
-        // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_GATEWAY };
-        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
-                Constants.SPRING_JMS_STANDALONE };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY,
+        final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
+        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
+        // Constants.SPRING_JMS_STANDALONE };
+        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
         // Constants.SPRING_JMS_EMBEDDED };
 
         return ret;
