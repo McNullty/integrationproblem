@@ -11,8 +11,6 @@ import hr.mladenc.configuration.AmqpListenerConfiguration;
 import hr.mladenc.configuration.JmsListenerConfiguration;
 import hr.mladenc.configuration.ProcessorConfiguration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotatedBeanDefinitionReader;
 import org.springframework.context.support.GenericApplicationContext;
 
@@ -23,7 +21,6 @@ import org.springframework.context.support.GenericApplicationContext;
  *
  */
 public class MessageProcessorRunner {
-    private static final Logger log = LoggerFactory.getLogger(MessageProcessorRunner.class);
 
     /**
      * @param args
@@ -37,8 +34,6 @@ public class MessageProcessorRunner {
                 ProcessorConfiguration.class, AmqpListenerConfiguration.class, JmsListenerConfiguration.class);
 
         context.refresh();
-
-        // TODO: Provjeriti standalone verziju
     }
 
     /**
@@ -48,8 +43,6 @@ public class MessageProcessorRunner {
         // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
         final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
                 Constants.SPRING_JMS_STANDALONE };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
-        // Constants.SPRING_JMS_EMBEDDED };
 
         return ret;
     }
