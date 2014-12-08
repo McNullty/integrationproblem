@@ -26,7 +26,8 @@ public class AmqpMessageListener implements MessageListener {
      */
     @Override
     public void onMessage(final Message message) {
-        AmqpMessageListener.log.debug("Listener got {}", message.getBody());
+        final String m = new String(message.getBody());
+        AmqpMessageListener.log.debug("Listener got {}", m);
     }
 
 }
