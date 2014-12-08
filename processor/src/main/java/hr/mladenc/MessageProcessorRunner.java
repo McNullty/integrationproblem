@@ -50,8 +50,8 @@ public class MessageProcessorRunner {
      * @return
      */
     private static String[] addActiveProfiles() {
-        final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR };
+        // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
+        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR };
 
         return ret;
     }

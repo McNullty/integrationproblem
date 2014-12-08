@@ -51,6 +51,7 @@ public class ActiveMqConfiguration {
     @Profile(value = { "jms-gateway" })
     public JmsMessageSender getMessageSender() {
         final JmsMessageSender sender = new JmsMessageSender(getJmsTemplate());
+        sender.setQueue(this.env.getProperty("queue.name"));
 
         return sender;
     }
