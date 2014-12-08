@@ -64,8 +64,7 @@ public class ProcessorWebAppInitializer implements WebApplicationInitializer {
      */
     private String[] addActiveProfiles() {
         // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
-        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
-                Constants.SPRING_JMS_STANDALONE };
+        final String[] ret = { Constants.SPRING_JMS_PROFILE };
 
         return ret;
     }

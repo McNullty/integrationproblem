@@ -26,21 +26,10 @@ public class ActiveMqConfiguration {
     @Inject
     private Environment env;
 
-    @Profile(value = { "jms-standalone" })
     @Bean
     public ActiveMQConnectionFactory getConnectionFactory() {
         final ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
         cf.setBrokerURL("tcp://" + this.env.getProperty("activemq.hostname") + ":"
-                + this.env.getProperty("activemq.port"));
-
-        return cf;
-    }
-
-    @Profile(value = { "jms-embadded" })
-    @Bean
-    public ActiveMQConnectionFactory getEmbaddedConnectionFactory() {
-        final ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
-        cf.setBrokerURL("vm://" + this.env.getProperty("activemq.hostname") + ":"
                 + this.env.getProperty("activemq.port"));
 
         return cf;

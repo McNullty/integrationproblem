@@ -18,8 +18,4 @@ public class Constants {
 
     public static final String SPRING_JMS_PROFILE = "jms";
     public static final String SPRING_JMS_GATEWAY = "jms-gateway";
-    public static final String SPRING_JMS_PROCESSOR = "jms-processor";
-    public static final String SPRING_JMS_STANDALONE = "jms-standalone";
-    public static final String SPRING_JMS_EMBEDDED = "jms-embadded";
-
 }
