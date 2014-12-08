@@ -31,7 +31,7 @@ public class ProcessorWebAppInitializer implements WebApplicationInitializer {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
@@ -66,8 +66,6 @@ public class ProcessorWebAppInitializer implements WebApplicationInitializer {
         // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_PROCESSOR };
         final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
                 Constants.SPRING_JMS_STANDALONE };
-        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_PROCESSOR,
-        // Constants.SPRING_JMS_EMBEDDED };
 
         return ret;
     }
