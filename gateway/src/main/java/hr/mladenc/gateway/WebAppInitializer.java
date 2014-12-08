@@ -30,7 +30,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 
     /*
      * (non-Javadoc)
-     *
+     * 
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
@@ -64,7 +64,10 @@ public class WebAppInitializer implements WebApplicationInitializer {
      */
     private String[] addActiveProfiles() {
         // final String[] ret = { Constants.SPRING_AMQP_PROFILE, Constants.SPRING_AMQP_GATEWAY };
-        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY };
+        final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY,
+                Constants.SPRING_JMS_STANDALONE };
+        // final String[] ret = { Constants.SPRING_JMS_PROFILE, Constants.SPRING_JMS_GATEWAY,
+        // Constants.SPRING_JMS_EMBEDDED };
 
         return ret;
     }
