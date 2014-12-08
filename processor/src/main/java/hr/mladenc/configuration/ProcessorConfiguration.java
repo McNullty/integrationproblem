@@ -3,8 +3,14 @@
  */
 package hr.mladenc.configuration;
 
+import javax.inject.Inject;
+import javax.jms.ConnectionFactory;
+
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 
 /**
  * @author mladenc
@@ -12,6 +18,14 @@ import org.springframework.context.annotation.Configuration;
  */
 @Configuration
 @ComponentScan(basePackages = { "hr.mladenc.processor", "hr.mladenc.listener" })
+@EnableJms
 public class ProcessorConfiguration {
+    @Bean
+    @Inject
+    public DefaultJmsListenerContainerFactory jmsListenerContainerFactory(final ConnectionFactory cf) {
+        final DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setConnectionFactory(cf);
 
+        return factory;
+    }
 }

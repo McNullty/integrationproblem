@@ -28,6 +28,7 @@ public class ActiveMqConfiguration {
     private Environment env;
 
     @Profile(value = { "jms-standalone" })
+    @Bean
     public ActiveMQConnectionFactory getConnectionFactory() {
         final ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
         cf.setBrokerURL("tcp://" + this.env.getProperty("activemq.hostname") + ":"
@@ -37,6 +38,7 @@ public class ActiveMqConfiguration {
     }
 
     @Profile(value = { "jms-embadded" })
+    @Bean
     public ActiveMQConnectionFactory getEmbaddedConnectionFactory() {
         final ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory();
         cf.setBrokerURL("vm://" + this.env.getProperty("activemq.hostname") + ":"
