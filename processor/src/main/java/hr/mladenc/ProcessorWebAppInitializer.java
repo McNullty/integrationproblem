@@ -31,13 +31,12 @@ public class ProcessorWebAppInitializer implements WebApplicationInitializer {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see org.springframework.web.WebApplicationInitializer#onStartup(javax.servlet.ServletContext)
      */
     @Override
     public void onStartup(final ServletContext container) throws ServletException {
 
-        // TODO: Provjeriti je li potreban logback-test.xml
         // The definition of the Root Spring Container shared by all Servlets and Filters
         final AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
         rootContext.getEnvironment().setActiveProfiles(addActiveProfiles());
