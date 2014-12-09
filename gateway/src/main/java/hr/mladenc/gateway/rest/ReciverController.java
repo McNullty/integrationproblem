@@ -4,7 +4,10 @@
 package hr.mladenc.gateway.rest;
 
 import hr.mladenc.common.sender.MessageSender;
+import hr.mladenc.model.constants.ValidationConstants;
 import hr.mladenc.model.message.MessageValidator;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -42,13 +45,50 @@ public class ReciverController {
     public ResponseEntity<?> recive(@RequestBody final String message) throws Exception {
         ReciverController.log.debug("Got message: {}", message);
 
-        if (this.validator.validate(message)) {
+        final List<ValidationConstants> validationResults = this.validator.validate(message);
+        if (validationResults.contains(ValidationConstants.VALIDATION_OK)) {
             this.sender.send(message);
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
-            ReciverController.log.error("Error validating message {}", message);
+            final String validationMessage = getValidationMessage(validationResults);
 
-            return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+            ReciverController.log.error(validationMessage);
+
+            return new ResponseEntity<String>(validationMessage, HttpStatus.BAD_REQUEST);
         }
+    }
+
+    /**
+     * @param validationResults
+     * @return
+     */
+    private String getValidationMessage(final List<ValidationConstants> validationResults) {
+        final StringBuilder sb = new StringBuilder();
+
+        if (validationResults.contains(ValidationConstants.NOT_MESSAGE_OBJECT)) {
+            sb.append("Message couldn't be deserialized. ");
+        }
+
+        if (validationResults.contains(ValidationConstants.MESSAGE_ID_MANDATORY)) {
+            sb.append("MessageId shouln't be null. ");
+        }
+        if (validationResults.contains(ValidationConstants.MESSAGE_ID_NOT_POSITIVE)) {
+            sb.append("MessageId must be positive integer. ");
+        }
+
+        if (validationResults.contains(ValidationConstants.TIMESTAMP_MANDATORY)) {
+            sb.append("Timestamp shouln't be null. ");
+        }
+        if (validationResults.contains(ValidationConstants.TIMESTAMP_NOT_POSITIVE)) {
+            sb.append("Timestamp must be positive integer. ");
+        }
+
+        if (validationResults.contains(ValidationConstants.PROTOCOL_VERSION_MANDATORY)) {
+            sb.append("Protocol version shouln't be null. ");
+        }
+        if (validationResults.contains(ValidationConstants.PROTOCOL_VERSION_INVALID_FORMAT)) {
+            sb.append("Protocol version must fave format  ##.#.# where # stays for one numeric character. ");
+        }
+        return sb.toString();
     }
 }
